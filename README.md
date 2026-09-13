@@ -2,7 +2,10 @@
 
 A lightweight Flask web app that acts as a personal AI assistant — ask it anything or paste in an email to get a quick summary, powered by the OpenAI API.
 
-<img src="assests/a6036deb-3b70-4209-b6e8-db21ffd07636.png" alt="Text Summarizer App Screenshot" width="720">
+<div align="center">
+   <img src="assests/a6036deb-3b70-4209-b6e8-db21ffd07636.png" alt="AI Personal Assistant" width="720">
+  <p><em>AI Personal Assistant ✨</em></p>
+</div>
 
 ## Features
 
