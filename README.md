@@ -10,7 +10,7 @@ A lightweight Flask web app that acts as a personal AI assistant — ask it anyt
 ## Features
 
 - **Ask Anything** — Type any question and get an instant AI-generated answer.
-- **Summarize Email** — Paste a long email and get a concise 2–3 sentence summary.
+- **Summarize Email** — Paste a long email and get a concise 2–3 sentence summary..
 - Clean, dark glassmorphic UI with smooth loading states.
 - Simple Flask backend with two REST-style JSON endpoints.
 
