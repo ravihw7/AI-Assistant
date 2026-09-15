@@ -1,53 +1,72 @@
 from flask import Flask, render_template, request, jsonify
 import os
 from dotenv import load_dotenv
-from openai import OpenAI
+import google.generativeai as genai
 
 app = Flask(__name__)
 
 load_dotenv()
-api_key = os.getenv("API_Key_openAI")
+api_key = os.getenv("GEMINI_API_KEY")
 
-client = OpenAI(api_key=api_key)
+if not api_key:
+    raise RuntimeError("Missing GEMINI_API_KEY. Add it to your .env file before starting the app.")
+
+genai.configure(api_key=api_key)
+
+ask_model = genai.GenerativeModel(
+    model_name="gemini-3.5-flash",
+    system_instruction="Act like a helpful personal assistant",
+)
+
+summary_model = genai.GenerativeModel(
+    model_name="gemini-3.5-flash",
+    system_instruction="Act like an expert email assistant",
+)
+
 
 @app.route("/")
 def hello_world():
     return render_template("index.html")
 
+
 @app.route("/ask", methods=["POST"])
 def ask():
     question = request.form.get("question")
-        
-    response = client.responses.create(
-        model="gpt-5.4",
-        input=[
-                {"role": "system", "content": "Act like a helpful personal assistant"},
-                {"role": "user", "content": question}
-            ],
-            temperature=0.7,
-            max_output_tokens=512
+
+    if not question:
+        return jsonify({"response": "Please provide a question."}), 400
+
+    response = ask_model.generate_content(
+        question,
+        generation_config={
+            "temperature": 0.7,
+            "max_output_tokens": 512,
+        },
     )
-        
-    answer = response.output_text.strip()
+
+    answer = response.text.strip()
     return jsonify({"response": answer}), 200
+
 
 @app.route("/summarize", methods=["POST"])
 def summarize():
     email_text = request.form.get("email")
-    prompt = f"summarize the following email in 2-3 sentences: {email_text}"
-        
-    response = client.responses.create(
-        model="gpt-5.4",
-        input=[
-                {"role": "system", "content": "Act like an expert email assistant"},                
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.3,
-            max_output_tokens=512
+
+    if not email_text:
+        return jsonify({"response": "Please provide email text to summarize."}), 400
+
+    prompt = f"Summarize the following email in 2-3 sentences: {email_text}"
+    response = summary_model.generate_content(
+        prompt,
+        generation_config={
+            "temperature": 0.3,
+            "max_output_tokens": 512,
+        },
     )
-        
-    summary = response.output_text.strip()
+
+    summary = response.text.strip()
     return jsonify({"response": summary}), 200
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
