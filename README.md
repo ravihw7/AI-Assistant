@@ -1,6 +1,6 @@
 # AI Personal Assistant
 
-A lightweight Flask web app that acts as a personal AI assistant — ask it anything or paste in an email to get a quick summary, powered by the OpenAI API.
+A lightweight Flask web app that acts as a personal AI assistant — ask it anything or paste in an email to get a quick summary, powered by the Google Gemini API.
 
 <div align="center">
    <img src="assests/a6036deb-3b70-4209-b6e8-db21ffd07636.png" alt="AI Personal Assistant" width="720">
@@ -10,14 +10,14 @@ A lightweight Flask web app that acts as a personal AI assistant — ask it anyt
 ## Features
 
 - **Ask Anything** — Type any question and get an instant AI-generated answer.
-- **Summarize Email** — Paste a long email and get a concise 2–3 sentence summary..
+- **Summarize Email** — Paste a long email and get a concise 2–3 sentence summary.
 - Clean, dark glassmorphic UI with smooth loading states.
 - Simple Flask backend with two REST-style JSON endpoints.
 
 ## Tech Stack
 
 - **Backend:** Python, Flask
-- **AI:** OpenAI API (`gpt-5.4`)
+- **AI:** Google Gemini API (`gemini-3.5-flash`)
 - **Frontend:** HTML, CSS, vanilla JavaScript
 - **Config:** python-dotenv for environment variables
 
@@ -25,7 +25,7 @@ A lightweight Flask web app that acts as a personal AI assistant — ask it anyt
 
 ```
 AI-Assistant/
-├── main.py              # Flask app & OpenAI API routes
+├── main.py              # Flask app & Gemini API routes
 ├── requirements.txt      # Python dependencies
 ├── static/
 │   └── style.css          # UI styling
@@ -39,7 +39,7 @@ AI-Assistant/
 ### Prerequisites
 
 - Python 3.8+
-- An [OpenAI API key](https://platform.openai.com/api-keys)
+- A [Google Gemini API key](https://aistudio.google.com/app/apikey)
 
 ### Installation
 
@@ -64,7 +64,7 @@ AI-Assistant/
 
    Create a `.env` file in the project root:
    ```
-   API_Key_openAI=your_openai_api_key_here
+   GEMINI_API_KEY=your_gemini_api_key_here
    ```
 
 5. Run the app
@@ -72,7 +72,7 @@ AI-Assistant/
    python main.py
    ```
 
-6. Open your browser and go to `http://127.0.0.1:5000`
+6. Open your browser and go to `http://127.0.0.1:5001`
 
 ## API Endpoints
 
