@@ -1,6 +1,6 @@
 # AI Personal Assistant
 
-A lightweight Flask web app that acts as a personal AI assistant — ask it anything or paste in an email to get a quick summary, powered by the Google Gemini API.
+A lightweight Flask web app that acts as a personal AI assistant — ask it anything or paste in an email to get a quick summary, powered by the Google Gemini API. 
 
 <div align="center">
    <img src="assests/a6036deb-3b70-4209-b6e8-db21ffd07636.png" alt="AI Personal Assistant" width="720">
